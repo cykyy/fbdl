@@ -105,11 +105,11 @@ def get_video_dict_fb(link):
         hdvideo_url = re.search('hd_src:"(.+?)"', html)[1]
     except:
         pass
-
-    vid_dict = {
-        'HD': hdvideo_url,
-        'SD': sdvideo_url
-    }
+    vid_dict = {}
+    if sdvideo_url:
+        vid_dict.update({'SD': sdvideo_url})
+    if hdvideo_url:
+        vid_dict.update({'HD': hdvideo_url})
     return vid_dict
 
 
@@ -137,7 +137,6 @@ def get_user_agent(request):
 
 
 def is_fb_url_valid(url):
-    # print('is_fb_url_val', url)
     if url.startswith('https://www.facebook.com/') or url.startswith('https://fb.watch/'):
         return True
     else:
