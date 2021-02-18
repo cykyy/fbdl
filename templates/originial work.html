@@ -1,0 +1,347 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!-- Required Meta tag -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- Fontawesome -->
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+   
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+   <!-- Custom CSS -->
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+   <!-- Favicon and title of the page -->
+   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+   <title>Youtube Downloader | All the videos you need, you can download </title>
+   
+</head>
+
+
+<body id="home" data-spy="scroll" data-target="#main-nav">
+
+<!-- NAVBAR -->
+
+   <nav class="navbar navbar-expand-md navbar-light fixed-top py-4" id="main-nav">
+      <div class="container">
+         <a href="#home" class="navbar-brand">
+            <img src="{% static 'img/mlogo.png' %}" alt="Logo of Downloader" width="50%" height="50%">
+         </a>
+
+         <button class="navbar-toggler" data-toggle="collapse" data-target= "#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+
+         <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+               <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+               <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+               <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+               <li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+
+<!-- NEWSLETTER -->
+   <section id="download" class="bg-light text-white py-5">
+      <div class="container">
+         <div class="row">
+            <div class="col">
+               <div class="info-header mb-5 text-center">
+                  <h1 class="text-primary pb-3 ">Youtube Downloader</h1>
+                  <p class="lead mb-5 text-dark"> Convert and download Youtube videos in MP3, MP4 for free, without any fuss!</p>
+               </div>
+            </div>
+         </div>
+         <form>
+            <div class="row">
+               <div class="col-md-8">
+                  <input type="text" class="download form-control form-control-lg mb-res" placeholder="Enter Youtube Link here">
+               </div>
+               <div class="col-md-4 text-center">
+                  <!--button type="submit" class="btn btn-outline-primary btn-lg">
+                     <i class="fas fa-download"></i> Download
+                  </button-->
+                  <button class="btn-red" type="submit" onclick="ksearchvideo();">Download</button>
+               </div>
+            </div>
+         </form>
+
+
+
+      </div>
+   </section>
+
+<!-- BOXES -->
+   <section id="boxes" class="py-5">
+      <div class="container">
+         <div class="row">
+            <div class="col">
+               <div class="info-header mb-5">
+                  <h1 class="text-primary pb-3 ">How to download video?</h1>
+                  <p class="lead mb-5">ytvid4u is simple and easy to use. We don't ask you to download any program/software
+                     to download youtube videos, therefore virtually no risk of getting hacked or infecting your device with virus.</p>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-4">
+               <div class="card text-center border-primary mb-res">
+                  <div class="card-body">
+                     <h3 class="text-primary ">Step One</h3>
+                     <p class="text-muted">First paste YouTube video link into the form.</p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-4"><div class="card text-center bg-primary text-white mb-res">
+               <div class="card-body">
+                  <h3 >Step Two</h3>
+                  <p >Choose output MP4 or MP3 format you want to convert and click "Download" button.</p>
+               </div>
+            </div></div>
+            <div class="col-md-4"><div class="card text-center border-primary mb-res">
+               <div class="card-body">
+                  <h3 class="text-primary">Step Three</h3>
+                  <p class="text-muted">Wait until the conversion is completed and download the file. Very easy and super fast.</p>
+               </div>
+            </div></div>   
+         </div>
+      </div>
+   </section>
+
+<!-- ABOUT / Q & A SECTION -->
+
+   <section id="about" class="py-5 text-center bg-light">
+      <div class="container">
+         <div class="row">
+            <div class="col">
+               <div class="info-header mb-5">
+                  <h2 class="text-primary h1 pb-3">Why This YouTube Downloader?</h2>
+                  <p class="lead pb-3 ">There are zillions of ways to download youtube videos but ours ytvid4u is a bit exceptional than others. Unlike other method we don't require you to download any software. Our solution is 100% online based.</p>
+               </div>
+
+               <!-- Accordian -->
+
+               <div id="accordian">
+                  <div class="card">
+                     <div class="card-header">
+                        <div class="mb-0" href="#collapse1" data-toggle="collapse" data-parent="#accordian">
+                           <h5>
+                              <i class="fas fa-arrow-circle-down">What is the fastest way to download Youtube videos?</i>
+                           </h5>
+                        </div>
+                     </div>
+                     <div id="collapse1" class="collapse show">
+                        <div class="card-body">
+                           Using our website to download Youtube video or audio is pretty darn fast and simple.
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="card">
+                     <div class="card-header">
+                        <div class="mb-0" href="#collapse2" data-toggle="collapse" data-parent="#accordian">
+                           <h5>
+                              <i class="fas fa-arrow-circle-down">What are the supported video/audio formats?</i>
+                           </h5>
+                        </div>
+                     </div>
+                     <div id="collapse2" class="collapse">
+                        <div class="card-body">
+                           Currently we support all the format supported by Youtube. On top of that we offer youtube video to mp3/audio conversion option. Need only audio of a video you like? Use ytvid4u.com.
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="card">
+                     <div class="card-header">
+                        <div class="mb-0" href="#collapse3" data-toggle="collapse" data-parent="#accordian">
+                           <h5>
+                              <i class="fas fa-arrow-circle-down">What are the compatible devices for the conversion?</i>
+                           </h5>
+                        </div>
+                     </div>
+                     <div id="collapse3" class="collapse">
+                        <div class="card-body">
+                           Unlike other youtube video downloader we are not limited by any specific system/architecture. We support all devices, mobile, iphone, android, PC, laptop, literally anything that can browse internet.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+<!-- Features -->
+
+   <section id="features" class="my-5 text-center">
+      <div class="container">
+         <div class="row">
+            <div class="col">
+               <div class="info-header mb-5">
+                  <h1 class="text-primary pb-3">The best YouTube Downloader</h1>
+                  <p class="lead mb-5">Convert and download Youtube videos in MP3, MP4, 3GP for free, no fuss.</p>
+               </div>
+            </div>
+         </div>
+
+         <div class="row">
+            <div class="col-lg-4 col-md-6 mb-resp">
+               <div class="card">
+                  <div class="card-body">
+                     <i class="fas fa-bolt fa-2x"></i>
+                     <h3>Fast & Easy to use</h3>
+                     Downloading youtube videos using ytvid4u service is the easiest way you will ever find. Simply copy video link and past here, wait for few moments and your video will be ready to download.
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-resp">
+               <div class="card">
+                  <div class="card-body">
+                     <i class="fas fa-user-shield fa-2x"></i>
+                     <h3>Full Safety</h3>
+                     Downloading and installing any unknown program from internet is never safe considering rising amount of hacking and data theft. Our tool is 100% online based and does the same job like any native tool, even faster and simply.
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-resp">
+               <div class="card">
+                  <div class="card-body">
+                     <i class="fas fa-infinity fa-2x"></i>
+                     <h3>Without limitation</h3>
+                     Download YouTube videos or convert youtube videos to audio as much as you want without any limitation. Our service is always free of cost.
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="row mt-5">
+            <div class="col-lg-4 col-md-6 mb-resp">
+               <div class="card">
+                  <div class="card-body">
+                     <i class="fas fa-tablet-alt fa-2x"></i>
+                     <h3>All platforms supported</h3>
+                     ytvid4u supports all device platforms. Easy to convert YouTube videos to MP3 files regardless of whether you are using Windows, Mac or Linux, Android, iPhone.
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-resp">
+               <div class="card">
+                  <div class="card-body">
+                     <i class="fas fa-video fa-2x"></i>
+                     <h3>All video formats</h3>
+                  We support all video and audio formats conversion. You can easily convert YouTube videos to MP3, MP4, etc. We support fast full hd youtube video conversion.
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-resp">
+               <div class="card">
+                  <div class="card-body">
+                     <i class="fas fa-file-audio fa-2x"></i>
+                     <h3>Youtube to Audio</h3>
+                     Not only youtube video downloading and converting, we also support 128kbps audio conversion of youtube video. And like downloading youtube video, you follow the same steps.
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- CONTACT -->
+   <section id="contact" class="bg-light py-5">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-9 text-center">
+               <h3>Get In Touch</h3>
+               <p class="lead">Let us know if you have any questions in mind.</p>
+               <form>
+                  <div class="input-group input-group-lg mb-3">
+                     <div class="input-group-prepend">
+                        <div class="input-group-text">
+                           <i class="fas fa-user"></i>
+                        </div>
+                     </div>
+                     <input type="text" class="form-control" placeholder="Your Name">
+                  </div>
+
+                  <div class="input-group input-group-lg mb-3">
+                     <div class="input-group-prepend">
+                        <div class="input-group-text">
+                           <i class="fas fa-envelope"></i>
+                        </div>
+                     </div>
+                     <input type="text" class="form-control" placeholder="Email Address">
+                  </div>
+
+                  <div class="input-group input-group-lg mb-3">
+                     <div class="input-group-prepend">
+                        <div class="input-group-text">
+                           <i class="fas fa-pencil-alt"></i>
+                        </div>
+                     </div>
+                     <textarea rows="4" class="form-control" placeholder="Your Message"></textarea>
+                  </div>
+                  <input type="submit" value="Submit" class="btn btn-primary btn-block">
+               </form>
+            </div>
+            <div class="col-lg-3 align-self-center">
+                  <img src="{% static 'img/mlogo.png' %}" alt="Logo" class="img-fluid">
+            </div>
+         </div>
+      </div>
+   </section>
+
+<!-- FOOTER -->
+   <footer id="main-footer" class="bg-dark py-5">
+      <div class="row text-center">
+         <div class="col-md-6 ml-auto">
+            <p class="lead text-light">
+               Copyright &copy;
+               <span id="year"></span>
+            </p>
+         </div>
+      </div>
+   </footer>
+
+   <!-- jQuery file -->
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+   <!-- Bootstrap jQuery file -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+   <!-- Custom jQuery -->
+   <script>
+      // get the current year for copywrite
+      $('#year').text(new Date().getFullYear());
+
+      // Init ScrollSpy
+      $('body').scrollspy({target: '#main-nav'});
+
+      // Smooth Scrolling
+      $('#main-nav a').on('click', function(event) {
+         if(this.hash !== '') {
+            event.preventDefault();
+            const hash = this.hash;
+
+            $('html, body').animate ( {
+               scrollTop: $(hash).offset().top
+            }, 800, function() {
+               window.location.hash = hash;
+            });
+         }
+      });
+
+   </script>
+</body>
+</html>

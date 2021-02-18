@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+yt/test_media/
+# ytdl/settings.py
+.DS_Store
+.idea/.gitignore
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/ytdl.iml
+media/
+venv/
+yt/.DS_Store
+yt/migrations/
+db.sqlite3
