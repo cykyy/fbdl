@@ -13,4 +13,4 @@ media/
 venv/
 yt/.DS_Store
 yt/migrations/
-db.sqlite3
+# db.sqlite3
