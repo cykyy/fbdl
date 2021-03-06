@@ -1,10 +1,13 @@
 import os
 import re
 import sys
+import ffmpeg
 
 from django.core.files import File
 from django.utils.encoding import force_text
 from pip._vendor import requests
+
+from fbdl.settings import BASE_DIR
 
 
 def get_valid_filename_to_uri(s):
@@ -28,81 +31,16 @@ def get_clean_filename(s):
     return re.sub(r'(?u)[^-\w.]', ' ', s)
 
 
-'''def get_video_formats_list(link):
-    # https://www.youtube.com/watch?v=PEuGRCqc8fQ
-    try:
-        yt_obj = YouTube(link)
-        yt = yt_obj.streams.filter(file_extension='mp4')  # , only_video=True
-        # return yt
-        vid_list = []
-        for vid in yt:
-            vid_list.append(vid)
-        # print(vid_list[0].itag)
-
-        return vid_list
-    except Exception as e:
-        print(e)'''
-
-
-def get_video_dict(vid_list):
-    vid_dict = {}
-    p1080 = False
-    p720 = False
-    p480 = False
-    p360 = False
-    p240 = False
-    p144 = False
-    mp3 = False
-
-    for vid in vid_list:
-        if vid.resolution is not None:
-            if vid.resolution == '1080p':
-                if not p1080:
-                    vid_dict.update({vid.resolution: vid.itag})
-                    p1080 = True
-            elif vid.resolution == '720p':
-                if vid.is_progressive:
-                    vid_dict.update({vid.resolution: vid.itag})
-                    p720 = True
-                    continue
-                if not p720:
-                    vid_dict.update({vid.resolution: vid.itag})
-                    p720 = True
-            elif vid.resolution == '480p':
-                if not p480:
-                    vid_dict.update({vid.resolution: vid.itag})
-                    p480 = True
-            elif vid.resolution == '360p':
-                if vid.is_progressive:
-                    vid_dict.update({vid.resolution: vid.itag})
-                    p360 = True
-                    continue
-                if not p360:
-                    vid_dict.update({vid.resolution: vid.itag})
-            elif vid.resolution == '240p':
-                if not p240:
-                    vid_dict.update({vid.resolution: vid.itag})
-                    p240 = True
-            elif vid.resolution == '144p':
-                if not p144:
-                    vid_dict.update({vid.resolution: vid.itag})
-                    p144 = True
-        if vid.itag == 140:
-            if not mp3:
-                vid_dict.update({'mp3 (128kbps)': vid.itag})
-                mp3 = True
-
-    return vid_dict
-
-
 # New for fb-dl
-def get_video_dict_fb(link):
+def get_video_dict_fb(link, only_src=False):
     sdvideo_url = ''
     hdvideo_url = ''
+    title = ''
     try:
         html = requests.get(link).content.decode('utf-8')
         sdvideo_url = re.search('sd_src:"(.+?)"', html)[1]
         hdvideo_url = re.search('hd_src:"(.+?)"', html)[1]
+        title = re.search('<title.*?>(.+?)</title>', html)[1]
     except:
         pass
     vid_dict = {}
@@ -110,6 +48,10 @@ def get_video_dict_fb(link):
         vid_dict.update({'SD': sdvideo_url})
     if hdvideo_url:
         vid_dict.update({'HD': hdvideo_url})
+    if title:
+        if not only_src:
+            x = get_valid_filename_to_uri(title)
+            vid_dict.update({'title': x})
     return vid_dict
 
 
@@ -155,3 +97,97 @@ def cook_fb_url(url):
         return 'https://' + url
     else:
         return url
+
+
+def convert_aud_mp4_to_mp3(aud_url='', name='', to_save=''):
+    # print('name:', name)
+    # input_audio = ffmpeg.input(aud_url)
+    if '.mp4' in name:
+        name = name.replace('.mp4', '.mp3')
+    _output = to_save + '/' + name
+
+    filename = _output
+    if not os.path.exists(os.path.dirname(filename)):
+        try:
+            os.makedirs(os.path.dirname(filename))
+        except OSError as exc:  # Guard against race condition
+            pass
+
+    '''ffmpeg.output(
+        input_audio,
+        _output,
+    ).run(overwrite_output=True)
+    # working
+    '''
+
+    '''(ffmpeg
+     .input(input_audio)
+     .output(_output)
+     .overwrite_output()
+     .run()
+     )'''
+
+    (ffmpeg
+     .input(aud_url)
+     .output(_output)
+     .overwrite_output()
+     .run()
+     )
+
+    return _output
+
+
+# downloading video from remote host
+def get_aud(url='', name=''):
+    """url = 'https://www.facebook.com/...'
+    r = requests.get(url, allow_redirects=True)
+    open('facebook.ico', 'wb').write(r.content)"""
+
+    if url:
+        '''iterate through all links in video_links  
+        and download them one by one'''
+
+        # obtain filename by splitting url and getting
+        # last string
+        # file_name = url.split('/')[-1]
+        to_save_folder = str(BASE_DIR / 'media/audio/temp')
+        abs_path = to_save_folder + '/' + name+'.mp4'
+
+        # print("Downloading file:%s" % name)
+
+        # create response object
+        r = requests.get(url, stream=True)
+
+        filename = abs_path
+        if not os.path.exists(os.path.dirname(filename)):
+            try:
+                os.makedirs(os.path.dirname(filename))
+            except OSError as exc:  # Guard against race condition
+                pass
+
+        # download started
+        with open(abs_path, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=1024 * 1024):
+                if chunk:
+                    f.write(chunk)
+
+        # print("%s downloaded!\n" % abs_path)
+        aud_name = name+'.mp3'
+        convert_aud_mp4_to_mp3(aud_url=abs_path, name=aud_name, to_save=str(BASE_DIR / 'media/audio/deliver'))
+        to_ret_dict = {
+            'abs_path': 'media/audio/deliver/' + aud_name,
+            'name': aud_name,
+            'content_type': 'audio/mpeg',
+            'format': 'mp3 (128kbps)'
+        }
+        return to_ret_dict
+
+
+# not working :(
+def get_file_name_from_req(url=''):
+    file_name = ''
+    if url:
+        r = requests.get(url)
+        d = r.headers.get('content-disposition')
+        file_name = re.findall("filename=(.+)", d)[0]
+    return file_name

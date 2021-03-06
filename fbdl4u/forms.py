@@ -1,5 +1,7 @@
 from django import forms
 
+from fbdl4u.models import Contact
+
 
 class LinkInsert(forms.Form):
     link = forms.CharField(max_length=256, required=False)
@@ -10,3 +12,10 @@ class LinkInsert(forms.Form):
 
 class LinkAjax(forms.Form):
     link = forms.CharField(max_length=256, required=False)
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = '__all__'
+        exclude = []

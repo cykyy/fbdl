@@ -10,7 +10,7 @@
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 
     <!-- SEO -->
-    <meta name="description" content="Download Facebook videos for free with fbdl4u.com. Our tool is very simple and easy to use, just paste any facebook video and choose the format you want and then download.">
+    <meta name="description" content="Download Facebook videos for free with fvidon.com. Our tool is very simple and easy to use, just paste any facebook video and choose the format you want and then download.">
     <meta name="robots" content="index, follow">
 
    <!-- Bootstrap CSS -->
@@ -22,7 +22,7 @@
    <!-- Favicon and title of the page -->
    <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon">
    <title>Facebook Downloader | Download Facebook Videos Online</title>
-   <meta name="application-name" content="fbdl4u">
+   <meta name="application-name" content="fvidon">
 
 </head>
 
@@ -91,7 +91,7 @@
                 </div>
                <div class="text-center">
 
-                  <p class="lead mb-5">fbdl4u.com is simple and easy to use. We don't ask you to download any program/software
+                  <p class="lead mb-5">fvidon.com is simple and easy to use. We don't ask you to download any program/software
                      to download facebook videos, therefore virtually no risk of getting hacked or infecting your device with virus.</p>
                </div>
             </div>
@@ -109,7 +109,7 @@
             <div class="col-md-4"><div class="card text-center border-primary mb-res" id='step2_1'>
                <div class="card-body" style="height: 10rem;">
                   <h3 id="step2_2" class="text-primary">Step Two</h3>
-                  <p id="step2_3" class="text-muted">Choose output HD or SD format you want to download and click "Get Link" button.</p>
+                  <p id="step2_3" class="text-muted">Choose output HD, SD or Audio format you want to download and click "Get Link" button.</p>
                </div>
             </div>
             </div>
@@ -131,7 +131,7 @@
             <div class="col">
                <div class="info-header mb-5">
                   <h2 class="text-primary h1 pb-3">Why This Facebook Video Downloader?</h2>
-                  <p class="lead pb-3 ">There are zillions of ways to download facebook videos but ours fbdl4u is a bit exceptional than others. Unlike other method we don't require you to download any software. Our solution is 100% online based.</p>
+                  <p class="lead pb-3 ">There are zillions of ways to download facebook videos but ours fvidon is a bit exceptional than others. Unlike other method we don't require you to download any software. Our solution is 100% online based.</p>
                </div>
 
                <!-- Accordian -->
@@ -162,7 +162,7 @@
                      </div>
                      <div id="collapse2" class="collapse">
                         <div class="card-body">
-                           Currently we support all the format supported by Facebook, SD or HD. On top of that we are working on Facebook video to mp3/audio conversion option. Need only audio of a video you like? You can use fbdl4u.com.
+                           Currently we support all the format supported by Facebook, SD or HD. On top of that we support Facebook video to mp3/audio conversion feature. Need only audio of a video you like? You can use fvidon.com.
                         </div>
                      </div>
                   </div>
@@ -206,7 +206,7 @@
                   <div class="card-body" style="height: 17rem;">
                      <i class="fas fa-bolt fa-2x"></i>
                      <h3>Fast & Easy to use</h3>
-                     Downloading Facebook videos using fbdl4u web-app is the easiest way you will ever find. Simply copy video link and paste here, wait for few moments and your video link will be ready for you to download.
+                     Downloading Facebook videos using fvidon web-app is the easiest way you will ever find. Simply copy video link and paste here, wait for few moments and your video link will be ready for you to download.
                   </div>
                </div>
             </div>
@@ -238,7 +238,7 @@
                   <div class="card-body" style="height: 17rem;">
                      <i class="fas fa-tablet-alt fa-2x"></i>
                      <h3>All platforms supported</h3>
-                     fbdl4u.com supports all device platforms. Easy to download fb videos or upcoming feature which will allow converting Facebook video to MP3 files regardless of whether you are using Windows, Mac or Linux, Android, iPhone.
+                     fvidon.com supports all device platforms. Easy to download fb videos or the feature which that allows converting Facebook video to MP3 files regardless of whether you are using Windows, Mac or Linux, Android, iPhone.
                   </div>
                </div>
             </div>
@@ -248,7 +248,7 @@
                   <div class="card-body" style="height: 17rem;">
                      <i class="fas fa-video fa-2x"></i>
                      <h3>All video formats</h3>
-                  We support all video formats. You can easily download FB videos. We support fast full hd facebook video conversion.
+                  We support all video formats. You can easily download FB videos. We support fast full hd facebook video and audio conversion.
                   </div>
                </div>
             </div>
@@ -258,13 +258,18 @@
                   <div class="card-body" style="height: 17rem;">
                      <i class="fas fa-file-audio fa-2x"></i>
                      <h3>Facebook to Audio</h3>
-                     Not only facebook video downloading, we are also working on to support 128kbps audio conversion of facebook video. And like downloading fb video, you follow the same steps.
+                     Not only facebook video downloading, we have also worked on to support 128kbps audio conversion of facebook video. And like downloading fb video, you follow the same steps.
                   </div>
                </div>
             </div>
          </div>
       </div>
    </section>
+<div class="d-flex justify-content-center">
+    <div style="width: 50rem" class="alert alert-success text-center"  role="alert">
+          Vidon Android app is upcoming!
+        </div>
+     </div>
 
    <!-- CONTACT -->
     {% include 'includes/_contact_front.html' %}
@@ -445,7 +450,8 @@
               to_prep_nf += `<option value="${item}">${item}</option>`
             }
 
-            to_prep_nf += `</select>
+            to_prep_nf += `<option value="Audio">Audio</option>
+                        </select>
                         </div>
 
                         <input type="hidden" id="custId" name="link2" value="${link_input}">

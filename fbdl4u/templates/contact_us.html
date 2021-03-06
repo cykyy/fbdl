@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="download" class="bg-light text-white py-5">
+        {% if messages %}
+            <div class="text-dark text-center">
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ message }}
+                </div>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ message }}
+                </div>
+                {% else %}
+                <div class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ message }}
+                </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+        {% endif %}
+
+      <div class="container">
+         <div class="row">
+            <div class="col">
+               <div class="info-header mb-5 text-center">
+                  <h1 class="text-primary pb-3 ">Contact Us</h1>
+               </div>
+
+                <div class="text-dark">
+                    {% include 'includes/_contact.html' %}
+                </div>
+
+            </div>
+         </div>
+      </div>
+   </section>
+{% endblock %}
