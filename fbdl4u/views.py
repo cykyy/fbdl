@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 # Create your views here.
 
 # current index view
+from django.utils import timezone
+
 from fbdl4u.forms import LinkInsert, LinkAjax, ContactForm
 from fbdl4u.helper import cook_fb_url, is_fb_url_valid, get_video_dict_fb, get_aud, get_file_name_from_req, \
     get_user_agent, get_client_ip
@@ -55,16 +57,19 @@ def ajax_post_format_dl(request):
                     cooked_url = cook_fb_url(link2)
                     if is_fb_url_valid(cooked_url):
                         vids_dict = get_video_dict_fb(cooked_url)
+                        name = vids_dict.get('title')
+                        if not name:
+                            name = 'fb_video_' + str(timezone.now())
                         if vid_format_cleaned == 'HD':
                             if vids_dict.get('HD'):
-                                Job.objects.create(name=vids_dict.get('title'), facebook=vids_dict.get('HD'),
+                                Job.objects.create(name=name, facebook=vids_dict.get('HD'),
                                                    resolution="HD", format="Video", abs_path="remote",
                                                    user_agent=get_user_agent(request), ip_addr=get_client_ip(request))
                                 return JsonResponse({"dl_url": vids_dict.get('HD'), "unique_id": 123,
                                                      'format': 'HD', 'device': 'iOS'}, status=200)
                         elif vid_format_cleaned == 'SD':
                             if vids_dict.get('SD'):
-                                Job.objects.create(name=vids_dict.get('title'), facebook=vids_dict.get('SD'),
+                                Job.objects.create(name=name, facebook=vids_dict.get('SD'),
                                                    resolution="SD", format="Video", abs_path="remote",
                                                    user_agent=get_user_agent(request), ip_addr=get_client_ip(request))
                                 return JsonResponse({"dl_url": vids_dict.get('SD'), "unique_id": 123,
@@ -72,7 +77,6 @@ def ajax_post_format_dl(request):
                         elif vid_format_cleaned == 'Audio':  # if requested for audio!;
                             if vids_dict:
                                 # if HD available then convert hd video to audio
-                                name = vids_dict.get('title')
                                 fb_url = ''
                                 if vids_dict.get('HD'):
                                     fb_url = vids_dict.get('HD')
@@ -80,7 +84,7 @@ def ajax_post_format_dl(request):
                                     fb_url = vids_dict.get('SD')
 
                                 aud_dict = get_aud(url=fb_url, name=name)
-                                Job.objects.create(name=vids_dict.get('title'), facebook=fb_url,
+                                Job.objects.create(name=name, facebook=fb_url,
                                                    resolution="Audio", format="Audio",
                                                    abs_path=str(aud_dict.get('abs_path')),
                                                    user_agent=get_user_agent(request), ip_addr=get_client_ip(request))

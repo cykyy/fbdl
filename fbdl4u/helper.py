@@ -151,6 +151,7 @@ def get_aud(url='', name=''):
         # last string
         # file_name = url.split('/')[-1]
         to_save_folder = str(BASE_DIR / 'media/audio/temp')
+        print('tosave', to_save_folder)
         abs_path = to_save_folder + '/' + name+'.mp4'
 
         # print("Downloading file:%s" % name)
